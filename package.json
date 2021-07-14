@@ -1,0 +1,23 @@
+{
+  "name": "diplom-backend",
+  "version": "1.0.0",
+  "description": "Diplom backend",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trixpk/movies-explorer-api.git"
+  },
+  "author": "Pavel Poliakov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trixpk/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Trixpk/movies-explorer-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
