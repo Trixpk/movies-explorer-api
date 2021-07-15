@@ -1,59 +1,59 @@
 const mongoose = require('mongoose');
-const {urlRegExp} = require('../utils/regexp');
+const { urlRegExp } = require('../utils/regexp');
 
 const movieSchema = mongoose.Schema({
   country: {
     type: String,
-    required: true
+    required: true,
   },
   director: {
     type: String,
-    required: true
+    required: true,
   },
   duration: {
     type: Number,
-    required: true
+    required: true,
   },
   year: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
     required: true,
-    validate: (v) => urlRegExp.test(v)
+    validate: (v) => urlRegExp.test(v),
   },
   trailer: {
     type: String,
     required: true,
-    validate: (v) => urlRegExp.test(v)
+    validate: (v) => urlRegExp.test(v),
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: (v) => urlRegExp.test(v)
+    validate: (v) => urlRegExp.test(v),
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: true
+    required: true,
   },
   movieId: {
     type: String,
-    required: true
+    required: true,
   },
   nameRU: {
     type: String,
-    required: true
+    required: true,
   },
   nameEN: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('movie', movieSchema);

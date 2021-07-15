@@ -3,5 +3,5 @@ const urlRegExp = /^(http|https):\/\/[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\.[a-z]{2,4}
 
 module.exports = {
   emailRegExp,
-  urlRegExp
-}
+  urlRegExp,
+};

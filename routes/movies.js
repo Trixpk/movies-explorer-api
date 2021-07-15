@@ -4,7 +4,7 @@ const { Joi, celebrate } = require('celebrate');
 const {
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 } = require('../controllers/movies');
 
 router.get('/', getMovies);
@@ -21,12 +21,12 @@ router.post('/', celebrate({
     movieId: Joi.string().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-  }).required()
-}) , createMovie);
+  }).required(),
+}), createMovie);
 router.delete('/:movieId', celebrate({
   params: {
     movieId: Joi.string().length(24).hex().required(),
-  }
-}) , deleteMovie);
+  },
+}), deleteMovie);
 
 module.exports = router;

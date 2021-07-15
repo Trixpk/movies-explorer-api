@@ -3,13 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { Joi, celebrate, errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const usersRoutes = require('./routes/users');
 const moviesRoutes = require('./routes/movies');
 const NotFoundError = require('./errors/not-found-err');
 const { createUser, login, signOut } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { Joi, celebrate, errors } = require('celebrate');
 
 const app = express();
 
@@ -30,15 +30,15 @@ app.post('/signup', celebrate({
   body: Joi.object({
     email: Joi.string().email().required(),
     name: Joi.string().min(2).max(30).required(),
-    password: Joi.string().required()
-  }).required()
-}) , createUser);
+    password: Joi.string().required(),
+  }).required(),
+}), createUser);
 app.post('/signin', celebrate({
   body: Joi.object({
     email: Joi.string().email().required(),
-    password: Joi.string().required()
-  }).required()
-}) , login);
+    password: Joi.string().required(),
+  }).required(),
+}), login);
 app.post('/signOut', signOut);
 
 app.use(auth);
@@ -47,7 +47,7 @@ app.use('/movies', moviesRoutes);
 
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена 404'));
-})
+});
 
 app.use(errorLogger);
 
