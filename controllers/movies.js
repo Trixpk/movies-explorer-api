@@ -6,7 +6,7 @@ const ForbiddenError = require('../errors/forbidden-error');
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .then((movies) => {
-      res.status(200).send({ data: movies });
+      res.send({ data: movies });
     })
     .catch(next);
 };
@@ -41,7 +41,7 @@ module.exports.createMovie = (req, res, next) => {
     owner: req.user._id,
   })
     .then((movie) => {
-      res.status(200).send({ data: movie });
+      res.send({ data: movie });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -64,7 +64,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (movie.owner.toString() === req.user._id) {
         Movie.deleteOne({ _id: movie._id })
           .then((deletedMovie) => {
-            res.status(200).send({ data: deletedMovie });
+            res.send({ data: deletedMovie });
           })
           .catch(next);
       } else {
@@ -74,8 +74,8 @@ module.exports.deleteMovie = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Ошибка валидации'));
+      }else {
+        next(err);
       }
-
-      next(err);
     });
 };

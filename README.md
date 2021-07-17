@@ -1,5 +1,5 @@
 # movies-explorer-api
 
-Публичный IP - 178.154.241.201
+Публичный IP - 84.252.131.254
 
 <br/>Доменное имя API - (https://api.trixpk.nomoredomains.club)

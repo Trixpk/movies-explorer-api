@@ -15,10 +15,16 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().uri().required(),
-    trailer: Joi.string().uri().required(),
-    thumbnail: Joi.string().uri().required(),
-    movieId: Joi.string().required(),
+    image: Joi.string().pattern(
+      new RegExp('^(http|https):\\/\\/[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\\.[a-z]{2,4}\\b(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?')
+    ).required(),
+    trailer: Joi.string().pattern(
+      new RegExp('^(http|https):\\/\\/[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\\.[a-z]{2,4}\\b(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?')
+    ).required(),
+    thumbnail: Joi.string().pattern(
+      new RegExp('^(http|https):\\/\\/[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\\.[a-z]{2,4}\\b(\\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?')
+    ).required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }).required(),

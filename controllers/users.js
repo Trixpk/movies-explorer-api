@@ -14,7 +14,7 @@ module.exports.getUser = (req, res, next) => {
         next(new UnauthorizedError('Необходима авторизация'));
       }
 
-      res.status(200).send({ data: user });
+      res.send({ data: user });
     })
     .catch(next);
 };
@@ -26,12 +26,14 @@ module.exports.updateUser = (req, res, next) => {
     { name, email },
     { new: true, runValidators: true },
   )
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Ошибка валидации данных'));
       } else if (err.name === 'ValidationError') {
         next(new BadRequestError('Ошибка валидации данных'));
+      }else if(err.name === 'MongoError' && err.code === 11000) {
+        next(new MongoError('Ошибка валидации'));
       } else {
         next(err);
       }
@@ -50,7 +52,7 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => {
       const response = user.toObject();
       delete response.password;
-      res.status(200).send({ data: response });
+      res.send({ data: response });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -87,7 +89,6 @@ module.exports.login = (req, res, next) => {
 
           res
             .cookie('jwt', token, { httpOnly: true })
-            .status(200)
             .send({ jwt: token });
         })
         .catch(next);
@@ -96,5 +97,5 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.signOut = (req, res) => {
-  res.clearCookie('jwt').status(200).send({ message: 'Всего доброго' });
+  res.clearCookie('jwt').send({ message: 'Всего доброго' });
 };
