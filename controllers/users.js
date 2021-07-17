@@ -32,7 +32,7 @@ module.exports.updateUser = (req, res, next) => {
         next(new BadRequestError('Ошибка валидации данных'));
       } else if (err.name === 'ValidationError') {
         next(new BadRequestError('Ошибка валидации данных'));
-      }else if(err.name === 'MongoError' && err.code === 11000) {
+      } else if (err.name === 'MongoError' && err.code === 11000) {
         next(new MongoError('Ошибка валидации'));
       } else {
         next(err);

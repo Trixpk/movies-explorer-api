@@ -8,6 +8,6 @@ const errorHandler = (err, req, res, next) => {
     });
 
   return next();
-}
+};
 
 module.exports = errorHandler;
