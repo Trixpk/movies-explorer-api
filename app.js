@@ -4,6 +4,7 @@ const { PORT = 3000 } = process.env;
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/error-handler');
@@ -18,6 +19,11 @@ const {
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const corsOptions = {
+  origin: 'https://trixpk.nomoredomains.club/',
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -30,6 +36,8 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
+
+app.use(cors(corsOptions));
 
 app.use(requestLogger);
 
