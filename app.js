@@ -20,7 +20,7 @@ const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const corsOptions = {
-  origin: 'https://trixpk.nomoredomains.club/',
+  origin: 'https://trixpk.nomoredomains.club',
   optionsSuccessStatus: 200,
   credentials: true,
 };
